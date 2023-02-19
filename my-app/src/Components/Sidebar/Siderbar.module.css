@@ -1,0 +1,13 @@
+.sidebar {
+  position: sticky;
+  float: left;
+  width: 70px;
+  border: solid 1px red;
+  height: 100vmax;
+}
+.sidebarIcons {
+  width: 28px;
+  display: block;
+  margin: 24px 26px;
+  cursor: pointer;
+}

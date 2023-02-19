@@ -1,9 +1,9 @@
 .searchbar {
-  font-size: 18px;
+  font-size: 16px;
   border-radius: 8px;
   border: none;
-  height: 28px;
-  padding: 12px 50px;
+  height: 26px;
+  padding: 10px 50px;
   background-color: #4b4c4e;
   width: 100%;
 }
@@ -11,6 +11,7 @@
   color: #4b4c4e;
   width: 74%;
   position: relative;
+  
 }
 input {
   color: #ccc3c3;

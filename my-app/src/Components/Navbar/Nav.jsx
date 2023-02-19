@@ -9,8 +9,28 @@ import ListIcon from './../../assets/listicon.svg'
 import GridIcon from './../../assets/gridicon.svg'
 import KeepLogo from './../../assets/KeepLogo.png'
 import Searchbar from '../../UI/Searchbar'
+import { useState } from 'react'
+import SettingsDropdown from './SettingsDropdown'
 
 const Nav = () => {
+  const [listtype,setlisttype]=useState(false);
+  const [settingsState, setSettingsState] = useState(false);
+  const settingsDropdown = () => {
+    if (settingsState == true) {
+      setSettingsState(false)
+    } else {
+      setSettingsState(true)
+    }
+  }
+  const setListType=()=>{
+    setlisttype(listtype?false:true);
+    if(listtype){
+      
+    }
+  }
+
+
+
   return (
     <div className={classes.Nav}>
       <div className={classes.navgroup}>
@@ -23,8 +43,13 @@ const Nav = () => {
       </div>
       <div className={classes.navright}>
         <img src={Refresh} className={classes.icons} />
-        <img src={ListIcon} className={classes.icons} />
-        <img src={Settings} className={classes.icons} />
+        <img onClick={setListType} src={ListIcon} className={classes.icons} />
+        <img
+          onClick={settingsDropdown}
+          src={Settings}
+          className={classes.icons}
+        />
+        <SettingsDropdown state={settingsState}/>
       </div>
       <div className={classes.navright}>
         <img src={GoogleApps} className={classes.appicon} />
