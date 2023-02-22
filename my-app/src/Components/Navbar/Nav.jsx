@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import classes from './Nav.module.css'
 import Refresh from './../../assets/refreshicon.svg'
 import GoogleApps from './../../assets/googleapps.svg'
@@ -11,10 +11,15 @@ import KeepLogo from './../../assets/KeepLogo.png'
 import Searchbar from '../../UI/Searchbar'
 import { useState } from 'react'
 import SettingsDropdown from './SettingsDropdown'
+import { useContext } from 'react'
+import ListContext from '../../store/listviewContext'
+import AppsDropdown from './AppsDropdown'
 
-const Nav = () => {
-  const [listtype,setlisttype]=useState(false);
+const Nav = props => {
+  const viewCtx = useContext(ListContext)
   const [settingsState, setSettingsState] = useState(false);
+  const[appsState,setAppsState]=useState(false)
+
   const settingsDropdown = () => {
     if (settingsState == true) {
       setSettingsState(false)
@@ -22,13 +27,13 @@ const Nav = () => {
       setSettingsState(true)
     }
   }
-  const setListType=()=>{
-    setlisttype(listtype?false:true);
-    if(listtype){
-      
+  const appsDropdown=()=>{
+    if (appsState == true) {
+      setAppsState(false)
+    } else {
+      setAppsState(true)
     }
   }
-
 
 
   return (
@@ -43,20 +48,24 @@ const Nav = () => {
       </div>
       <div className={classes.navright}>
         <img src={Refresh} className={classes.icons} />
-        <img onClick={setListType} src={ListIcon} className={classes.icons} />
+        <img
+          onClick={viewCtx.setViewtype}
+          src={ListIcon}
+          className={classes.icons}
+        />
         <img
           onClick={settingsDropdown}
           src={Settings}
           className={classes.icons}
         />
-        <SettingsDropdown state={settingsState}/>
+        <SettingsDropdown state={settingsState} />
       </div>
       <div className={classes.navright}>
-        <img src={GoogleApps} className={classes.appicon} />
+        <img src={GoogleApps} onClick={appsDropdown} className={classes.appicon} />
+        <AppsDropdown state={appsState}/>
         <img src={UserIcon} className={classes.usericon} />
       </div>
     </div>
   )
 }
-
 export default Nav
