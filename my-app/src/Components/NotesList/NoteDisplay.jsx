@@ -12,6 +12,7 @@ const NoteDisplay = (props) => {
       setClassName('viewGrid')
     }
   },[viewCtx.viewType])
+
 return(
     <div className={className}>
         {props.note}

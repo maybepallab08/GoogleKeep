@@ -5,22 +5,21 @@ import classes from './NoteForm.module.css'
 import Notelist from '../NotesList/Notelist'
 import { useEffect } from 'react'
 
-const NoteForm = () => {
-  const [notes, setNotes] = useState([])
+const NoteForm = (props) => {
   const newNoteRef = useRef()
+
   const noteAddHandler = (event) => {
-    if(newNoteRef.current.value!=''){
-    setNotes([newNoteRef.current.value, ...notes])
-    }
     event.preventDefault();
-  }
-  useEffect(()=>{
-     newNoteRef.current.value='';
-  },[notes])
+    if (newNoteRef.current.value !== '') {
+      const newNote = newNoteRef.current.value;
+      props.addNote(newNote);
+      newNoteRef.current.value = ''
+    }
+  };
 
   return (
     <div className={classes.noteform}>
-      <form onBlur={noteAddHandler} onSubmit={noteAddHandler}>
+      <form onSubmit={noteAddHandler}>
         <input
           type="text"
           className={classes.takenote}
@@ -28,7 +27,6 @@ const NoteForm = () => {
           ref={newNoteRef}
         />
       </form>
-      <Notelist notes={notes} />
     </div>
   )
 }
